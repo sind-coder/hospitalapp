@@ -10,6 +10,7 @@
 1. Java 8 and Maven 3
 2. Wampserver 3
 # Usage
+##Windows
 ```bash
 cd path/to/project
 mvn clean install
