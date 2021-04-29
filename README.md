@@ -11,6 +11,7 @@
 2. Wampserver 3
 # Usage
 ```bash
+cd path/to/project
 mvn clean install
 java -jar ./target./hospitalapp-0.0.1-SNAPSHOT.jar
 ```
