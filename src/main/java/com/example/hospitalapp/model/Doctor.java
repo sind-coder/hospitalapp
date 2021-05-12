@@ -2,6 +2,8 @@ package com.example.hospitalapp.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.sun.istack.NotNull;
+import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
 import java.sql.Time;
@@ -10,25 +12,37 @@ import java.util.Set;
 
 
 @Entity
+@Table(name="doctor")
 public class Doctor {
     @Id
+    @NotNull
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     @JsonView(Views.Vue.class)
     private Long id;
 
+    @Column(name = "firstname")
+    @NotNull
     @JsonView(Views.Vue.class)
     private String firstName;
 
+    @Column(name = "lastname")
+    @NotNull
     @JsonView(Views.Vue.class)
     private String lastName;
 
+    @Column(name = "position")
+    @NotNull
     @JsonView(Views.Vue.class)
     private String position;
 
+    @Column(name = "time_start")
+    @NotNull
     @JsonView(Views.Vue.class)
     private String time_start;
 
+    @Column(name = "time_end")
+    @NotNull
     @JsonView(Views.Vue.class)
     private String time_end;
 

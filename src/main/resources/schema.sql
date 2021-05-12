@@ -1,0 +1,17 @@
+SELECT 'CREATE DATABASE hospital WITH OWNER = postgres ENCODING = "UTF8" LC_COLLATE = "Russian_Russia.1252" LC_CTYPE = "Russian_Russia.1252" TABLESPACE = pg_default CONNECTION LIMIT = -1;'
+    WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'hospital');
+
+CREATE TABLE IF NOT EXISTS patient
+(
+    Id SERIAL,
+    FirstName CHARACTER VARYING(255) NOT NULL,
+    LastName CHARACTER VARYING(255) NOT NULL,
+    Diagnosis CHARACTER VARYING(255),
+    Age INTEGER,
+    PRIMARY KEY (Id)
+);
+CREATE TABLE IF NOT EXISTS patient_acceptance
+(
+    Id_Doctor BIGINT REFERENCES doctor NOT NULL,
+    Id_Patient BIGINT REFERENCES patient NOT NULL
+);
