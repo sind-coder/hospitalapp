@@ -1,5 +1,7 @@
 package com.example.hospitalapp.controller;
 
+import com.example.hospitalapp.mapper.DoctorMapper;
+import com.example.hospitalapp.mapper.PatientMapper;
 import com.example.hospitalapp.model.Doctor;
 import com.example.hospitalapp.model.Patient;
 import com.example.hospitalapp.model.Views;
@@ -11,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequestMapping("/doctor")
 @RestController
@@ -22,6 +25,12 @@ public class DoctorController {
     @Autowired
     private PatientService patientService;
 
+    @Autowired
+    DoctorMapper doctorMapper;
+
+    @Autowired
+    PatientMapper patientMapper;
+
     public DoctorController(DoctorService doctorService, PatientService patientService){
         this.doctorService = doctorService;
         this.patientService = patientService;
@@ -31,24 +40,24 @@ public class DoctorController {
     @GetMapping
     @JsonView(Views.Vue.class)
     public List<Doctor> doctorAll(){
-        return doctorService.findAll();
+        return doctorService.findAll().stream().map(doctorMapper::convertToEntity).collect(Collectors.toList());
     }
 
     @JsonView(Views.Vue.class)
     @GetMapping("/{id}")
     public List<Patient> patientsbyIdDoctor (@PathVariable(name="id") Long id, Model model){
-        return patientService.findByDoctorsId(id);
+        return patientService.findByDoctorsId(id).stream().map(patientMapper::convertToEntity).collect(Collectors.toList());
     }
 
     @PostMapping()
     public Doctor createDoctor(@RequestBody Doctor doctor) {
-        return doctorService.save(new Doctor(doctor.getFirstName(),doctor.getLastName(),doctor.getPosition(),doctor.getTime_start(),doctor.getTime_end()));
+        return doctorMapper.convertToEntity(doctorService.save(new Doctor(doctor.getFirstName(),doctor.getLastName(),doctor.getPosition(),doctor.getTime_start(),doctor.getTime_end())));
     }
 
     @PutMapping("/{id}")
     public Doctor updateDoctor(@RequestBody Doctor doctor,
                                 @PathVariable(name = "id") Long id) {
-        return doctorService.findById_update(doctor,id);
+        return doctorMapper.convertToEntity(doctorService.findById_update(doctor,id));
     }
 
     @DeleteMapping("/{id}")
