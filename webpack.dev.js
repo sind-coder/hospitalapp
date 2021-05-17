@@ -8,6 +8,7 @@ const { merge } = require('webpack-merge');
        contentBase: './dist',
        compress: true,
        port: 8000,
+       hot: true,
        allowedHosts: [
          'localhost:8080'
        ],
