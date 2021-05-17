@@ -26,12 +26,14 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public List<PatientDto> findAll() {
-        return patientRepository.findAll().stream().map(patientMappper::convertToDto).collect(Collectors.toList());
+        return patientRepository.findAll().stream()
+                .map(patientMappper::convertToDto).collect(Collectors.toList());
     }
 
     @Override
     public List<PatientDto> findByDoctorsId(Long id) {
-        return patientRepository.findByDoctorsId(id).stream().map(patientMappper::convertToDto).collect(Collectors.toList());
+        return patientRepository.findByDoctorsId(id).stream()
+                .map(patientMappper::convertToDto).collect(Collectors.toList());
     }
 
     @Override

@@ -14,7 +14,7 @@ import java.util.Set;
 public class Doctor {
     @Id
     @NotNull
-    @Column(name = "id")
+    @Column(name = "doctorid")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonView(Views.Vue.class)
     private Long id;
@@ -34,22 +34,22 @@ public class Doctor {
     @JsonView(Views.Vue.class)
     private String position;
 
-    @Column(name = "time_start")
+    @Column(name = "timestart")
     @NotNull
     @JsonView(Views.Vue.class)
-    private String time_start;
+    private String timeStart;
 
-    @Column(name = "time_end")
+    @Column(name = "timeend")
     @NotNull
     @JsonView(Views.Vue.class)
-    private String time_end;
+    private String timeEnd;
 
     public Doctor(){}
 
     @ManyToMany
-    @JoinTable(name = "patient_acceptance",
-            joinColumns = {@JoinColumn(name="id_doctor")},
-            inverseJoinColumns = {@JoinColumn(name = "id_patient")})
+    @JoinTable(name = "patientacceptance",
+            joinColumns = {@JoinColumn(name="doctorid")},
+            inverseJoinColumns = {@JoinColumn(name = "patientid")})
     private Set<Patient> patients = new HashSet<>();
 
 
@@ -61,12 +61,13 @@ public class Doctor {
         this.patients = patients;
     }
 
-    public Doctor(String firstName, String lastName, String position, String time_start, String time_end) {
+    public Doctor(String firstName, String lastName,
+                  String position, String timeStart, String timeEnd) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.position = position;
-        this.time_start = time_start;
-        this.time_end = time_end;
+        this.timeStart = timeStart;
+        this.timeEnd = timeEnd;
     }
 
     public String getPosition() {
@@ -77,20 +78,20 @@ public class Doctor {
         this.position = position;
     }
 
-    public String getTime_start() {
-        return time_start;
+    public String getTimeStart() {
+        return timeStart;
     }
 
-    public void setTime_start(String time_start) {
-        this.time_start = time_start;
+    public void setTimeStart(String timeStart) {
+        this.timeStart = timeStart;
     }
 
-    public String getTime_end() {
-        return time_end;
+    public String getTimeEnd() {
+        return timeEnd;
     }
 
-    public void setTime_end(String time_end) {
-        this.time_end = time_end;
+    public void setTimeEnd(String timeEnd) {
+        this.timeEnd = timeEnd;
     }
 
     public Long getId() {

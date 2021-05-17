@@ -115,7 +115,6 @@ computed: {
 
    if(this.valid() && !(this.entry())){
    this.showDismissibleAlert=true
-   console.log('create');
    this.$resource('/doctor{/id}').save({},doctor).then(result =>
    result.json().then(data =>{
    this.firstName = ''

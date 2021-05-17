@@ -28,12 +28,14 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public List<DoctorDto> findAll() {
-        return doctorRepository.findAll().stream().map(doctorMapper::convertToDto).collect(Collectors.toList());
+        return doctorRepository.findAll().stream()
+                .map(doctorMapper::convertToDto).collect(Collectors.toList());
     }
 
     @Override
     public List<DoctorDto> findByPatientsId(Long id) {
-        return doctorRepository.findByPatientsId(id).stream().map(doctorMapper::convertToDto).collect(Collectors.toList());
+        return doctorRepository.findByPatientsId(id).stream()
+                .map(doctorMapper::convertToDto).collect(Collectors.toList());
     }
 
     @Override
@@ -43,8 +45,8 @@ public class DoctorServiceImpl implements DoctorService {
                     doctors.setFirstName(doctor.getFirstName());
                     doctors.setLastName(doctor.getLastName());
                     doctors.setPosition(doctor.getPosition());
-                    doctors.setTime_start(doctor.getTime_start());
-                    doctors.setTime_end(doctor.getTime_end());
+                    doctors.setTimeStart(doctor.getTimeStart());
+                    doctors.setTimeEnd(doctor.getTimeEnd());
                     return doctorMapper.convertToDto(doctorRepository.save(doctor));
                 }).orElseGet(() -> {
             doctor.setId(id);
@@ -54,12 +56,15 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public List<DoctorDto> findById(Long id) {
-        return doctorRepository.findById(id).stream().map(doctorMapper::convertToDto).collect(Collectors.toList());
+        return doctorRepository.findById(id).stream()
+                .map(doctorMapper::convertToDto).collect(Collectors.toList());
     }
 
     @Override
     public DoctorDto save(Doctor doctor) {
-        return doctorMapper.convertToDto(doctorRepository.save(new Doctor(doctor.getFirstName(), doctor.getLastName(), doctor.getPosition(), doctor.getTime_start(), doctor.getTime_end())));
+        return doctorMapper.convertToDto(doctorRepository.save(
+                new Doctor(doctor.getFirstName(), doctor.getLastName(),
+                        doctor.getPosition(), doctor.getTimeStart(), doctor.getTimeEnd())));
     }
 
     @Override

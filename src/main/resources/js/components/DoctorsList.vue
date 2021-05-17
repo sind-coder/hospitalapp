@@ -21,7 +21,7 @@ import DoctorForm from 'components/DoctorForm.vue'
         created(){
         this.$resource('/doctor{/id}').get().then(result =>
         result.json().then(data =>
-        data.forEach(doctor => this.doctors.push(doctor))))
+                data.forEach(doctor => this.doctors.push(doctor))))
 },
 methods: {
 create: function(){

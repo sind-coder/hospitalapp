@@ -5,8 +5,8 @@ public class DoctorDto {
     private String firstName;
     private String lastName;
     private String position;
-    private String time_start;
-    private String time_end;
+    private String timeStart;
+    private String timeEnd;
 
     public String getFirstName() {
         return firstName;
@@ -40,19 +40,19 @@ public class DoctorDto {
         this.position = position;
     }
 
-    public String getTime_start() {
-        return time_start;
+    public String getTimeStart() {
+        return timeStart;
     }
 
-    public void setTime_start(String time_start) {
-        this.time_start = time_start;
+    public void setTimeStart(String timeStart) {
+        this.timeStart = timeStart;
     }
 
-    public String getTime_end() {
-        return time_end;
+    public String getTimeEnd() {
+        return timeEnd;
     }
 
-    public void setTime_end(String time_end) {
-        this.time_end = time_end;
+    public void setTimeEnd(String timeEnd) {
+        this.timeEnd = timeEnd;
     }
 }

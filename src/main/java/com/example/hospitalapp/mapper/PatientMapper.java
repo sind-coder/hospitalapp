@@ -16,7 +16,7 @@ public class PatientMapper {
         PatientDto patientDto = modelMapper.map(patient, PatientDto.class);
         return patientDto;
     }
-    public Patient convertToEntity(PatientDto patientDto){
+    public Patient convertToEntity(PatientDto patientDto) {
         Patient patient = modelMapper.map(patientDto, Patient.class);
         return patient;
     }
