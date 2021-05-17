@@ -9,6 +9,8 @@ import com.example.hospitalapp.service.DoctorService;
 import com.example.hospitalapp.service.PatientService;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,30 +41,50 @@ public class DoctorController {
 
     @GetMapping
     @JsonView(Views.Vue.class)
-    public List<Doctor> doctorAll(){
-        return doctorService.findAll().stream().map(doctorMapper::convertToEntity).collect(Collectors.toList());
+    public ResponseEntity<List<Doctor>> doctorAll(){
+        List<Doctor> doctorList = doctorService.findAll().stream().map(doctorMapper::convertToEntity).collect(Collectors.toList());
+        if (doctorList.toArray().length == 0){
+            return new ResponseEntity<>(doctorList, HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(doctorList, HttpStatus.OK);
+        }
     }
 
     @JsonView(Views.Vue.class)
     @GetMapping("/{id}")
-    public List<Patient> patientsbyIdDoctor (@PathVariable(name="id") Long id, Model model){
-        return patientService.findByDoctorsId(id).stream().map(patientMapper::convertToEntity).collect(Collectors.toList());
+    public ResponseEntity<List<Patient>> patientsbyIdDoctor (@PathVariable(name="id") Long id, Model model){
+        List<Patient> patientList = patientService.findByDoctorsId(id).stream().map(patientMapper::convertToEntity).collect(Collectors.toList());
+        if (patientList.toArray().length == 0){
+            return new ResponseEntity<>(patientList, HttpStatus.NO_CONTENT);
+        } else {
+        return new ResponseEntity<>(patientList, HttpStatus.OK);
+        }
     }
 
     @PostMapping()
-    public Doctor createDoctor(@RequestBody Doctor doctor) {
-        return doctorMapper.convertToEntity(doctorService.save(new Doctor(doctor.getFirstName(),doctor.getLastName(),doctor.getPosition(),doctor.getTime_start(),doctor.getTime_end())));
+    public ResponseEntity<Doctor> createDoctor(@RequestBody Doctor doctor) {
+        Doctor doctorPost = doctorMapper.convertToEntity(doctorService.save(new Doctor(doctor.getFirstName(),doctor.getLastName(),doctor.getPosition(),doctor.getTime_start(),doctor.getTime_end())));
+        if (doctorPost == null){
+            return new ResponseEntity<>(doctorPost, HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(doctorPost, HttpStatus.CREATED);
+        }
     }
 
     @PutMapping("/{id}")
-    public Doctor updateDoctor(@RequestBody Doctor doctor,
+    public ResponseEntity<Doctor> updateDoctor(@RequestBody Doctor doctor,
                                 @PathVariable(name = "id") Long id) {
-        return doctorMapper.convertToEntity(doctorService.findById_update(doctor,id));
+        Doctor doctorPut = doctorMapper.convertToEntity(doctorService.findById_update(doctor,id));
+        if (doctorPut == null){
+            return new ResponseEntity<>(doctorPut, HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(doctorPut, HttpStatus.CREATED);
+        }
     }
 
     @DeleteMapping("/{id}")
-    public String deleteDoctor(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<String> deleteDoctor(@PathVariable(name = "id") Long id) {
         doctorService.deleteById(id);
-        return "Ok";
+        return new ResponseEntity<>("Delete doctor", HttpStatus.OK);
     }
 }
