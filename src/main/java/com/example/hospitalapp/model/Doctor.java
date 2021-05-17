@@ -1,12 +1,10 @@
 package com.example.hospitalapp.model;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+
 import com.fasterxml.jackson.annotation.JsonView;
+
 import com.sun.istack.NotNull;
-import org.springframework.lang.NonNull;
 
 import javax.persistence.*;
-import java.sql.Time;
 import java.util.HashSet;
 import java.util.Set;
 
