@@ -22,31 +22,31 @@ public class PatientServiceImpl implements PatientService {
     private DoctorRepository doctorRepository;
 
     @Autowired
-    public PatientMapper patientMappper;
+    public PatientMapper patientMapper;
 
     @Override
     public List<PatientDto> findAll() {
         return patientRepository.findAll().stream()
-                .map(patientMappper::convertToDto).collect(Collectors.toList());
+                .map(patientMapper::convertToDto).collect(Collectors.toList());
     }
 
     @Override
     public List<PatientDto> findByDoctorsId(Long id) {
         return patientRepository.findByDoctorsId(id).stream()
-                .map(patientMappper::convertToDto).collect(Collectors.toList());
+                .map(patientMapper::convertToDto).collect(Collectors.toList());
     }
 
     @Override
-    public PatientDto findById_update(Patient patient, Long id) {
+    public PatientDto findByIdUpdate(Patient patient, Long id) {
         return patientRepository.findById(id).map(
                 patients -> {
                     patients.setFirstName(patient.getFirstName());
                     patients.setLastName(patient.getLastName());
                     patients.setDiagnosis(patient.getDiagnosis());
                     patients.setAge(patient.getAge());
-                    return patientMappper.convertToDto(patientRepository.save(patient));
+                    return patientMapper.convertToDto(patientRepository.save(patient));
                 }).orElseGet(() -> {patient.setId(id);
-            return patientMappper.convertToDto(patientRepository.save(patient));
+            return patientMapper.convertToDto(patientRepository.save(patient));
         });
     }
 

@@ -9,7 +9,7 @@ public interface DoctorService {
     List<DoctorDto> findAll();
     List<DoctorDto> findByPatientsId(Long id);
     List<DoctorDto> findById(Long id);
-    DoctorDto findById_update(Doctor doctor, Long id);
+    DoctorDto findByIdUpdate(Doctor doctor, Long id);
     DoctorDto save (Doctor doctor);
     void deleteById(Long id);
 }

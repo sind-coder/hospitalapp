@@ -9,7 +9,7 @@ import java.util.List;
 public interface PatientService {
     List<PatientDto> findAll();
     List<PatientDto> findByDoctorsId(Long id);
-    PatientDto findById_update(Patient patient, Long id);
+    PatientDto findByIdUpdate(Patient patient, Long id);
     void deleteById(Long id);
     void save(Patient patient);
 }

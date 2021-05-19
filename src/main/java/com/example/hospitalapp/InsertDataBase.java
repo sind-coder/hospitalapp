@@ -14,55 +14,57 @@ import java.util.*;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.toSet;
+
 @Component
 public class InsertDataBase implements ApplicationListener<ContextRefreshedEvent>{
     @Autowired
-    DoctorService doctorService;
+    private DoctorService doctorService;
 
     @Autowired
-    PatientService patientService;
+    private PatientService patientService;
 
     @Autowired
-    DoctorMapper doctorMapper;
+    private DoctorMapper doctorMapper;
 
     private static Logger log = Logger.getLogger(InsertDataBase.class.getName());
 
     @Override
     public void onApplicationEvent(final ContextRefreshedEvent event) {
-        List<Doctor> verify_enty = doctorService.findAll().stream().map(doctorMapper::convertToEntity).collect(Collectors.toList());
-        if (verify_enty.toArray().length == 0) {
-            ArrayList<String> firstname = new ArrayList<>();
-            firstname.add("Igor");
-            firstname.add("Fedor");
-            firstname.add("Alexander");
-            firstname.add("Semyon");
-            firstname.add("Alex");
-            firstname.add("Dmitriy");
-            firstname.add("Stepan");
-            ArrayList<String> lastname = new ArrayList<>();
-            lastname.add("Kuzmin");
-            lastname.add("Sidorov");
-            lastname.add("Petrov");
-            lastname.add("Seleznev");
-            lastname.add("Alexandrov");
-            lastname.add("Vilkov");
-            lastname.add("Bolshakov");
-            ArrayList<String> position = new ArrayList<>();
+        List<Doctor> doctorVerifyToEmpty = doctorService.findAll().stream().map(doctorMapper::convertToEntity).collect(Collectors.toList());
+        if (doctorVerifyToEmpty.toArray().length == 0) {
+            List<String> firstName = new ArrayList<>();
+            firstName.add("Igor");
+            firstName.add("Fedor");
+            firstName.add("Alexander");
+            firstName.add("Semyon");
+            firstName.add("Alex");
+            firstName.add("Dmitriy");
+            firstName.add("Stepan");
+            List<String> lastName = new ArrayList<>();
+            lastName.add("Kuzmin");
+            lastName.add("Sidorov");
+            lastName.add("Petrov");
+            lastName.add("Seleznev");
+            lastName.add("Alexandrov");
+            lastName.add("Vilkov");
+            lastName.add("Bolshakov");
+            List<String> position = new ArrayList<>();
             position.add("Gynecologist");
             position.add("Ophthalmologist");
             position.add("Pediatrician");
             position.add("Therapist");
             position.add("Oncologist");
             position.add("Orthopedist");
-            ArrayList<String> diagnosis = new ArrayList<>();
+            List<String> diagnosis = new ArrayList<>();
             diagnosis.add("Glaucoma");
             diagnosis.add("Cataract");
             diagnosis.add("Cancer");
             diagnosis.add("Fracture");
-            ArrayList<Long> doctors = new ArrayList<>();
+            List<Long> doctors = new ArrayList<>();
             for (int i = 0; i < 10; i++) {
-                Doctor newDoctor = new Doctor(firstname.get((int) Math.floor(Math.random() * firstname.toArray().length)),
-                        lastname.get((int) Math.floor(Math.random() * lastname.toArray().length)),
+                Doctor newDoctor = new Doctor(firstName.get((int) Math.floor(Math.random() * firstName.toArray().length)),
+                        lastName.get((int) Math.floor(Math.random() * lastName.toArray().length)),
                         position.get((int) Math.floor(Math.random() * position.toArray().length)),
                         "0" + (i % 10) + ":" + "0" + (i % 10), "1" + (i % 10) + ":" + "1" + (i % 10));
                 doctorService.save(newDoctor);
@@ -70,10 +72,11 @@ public class InsertDataBase implements ApplicationListener<ContextRefreshedEvent
             }
             for (int i = 0; i < 10; i++) {
                 int index = (int) Math.floor(Math.random() * doctors.toArray().length);
+                log.info(Integer.toString(index));
                 Set<Doctor> doctor = doctorService.findById(doctors.get(index)).stream()
-                        .map(doctorMapper::convertToEntity).collect(Collectors.toSet());
-                Patient newPatient = new Patient(firstname.get((int) Math.floor(Math.random() * firstname.toArray().length)),
-                        lastname.get((int) Math.floor(Math.random() * lastname.toArray().length)),
+                        .map(doctorMapper::convertToEntity).collect(toSet());
+                Patient newPatient = new Patient(firstName.get((int) Math.floor(Math.random() * firstName.toArray().length)),
+                        lastName.get((int) Math.floor(Math.random() * lastName.toArray().length)),
                         diagnosis.get((int) Math.floor(Math.random() * diagnosis.toArray().length)),
                         ((int) Math.floor(Math.random() * 99)), doctor);
                 patientService.save(newPatient);

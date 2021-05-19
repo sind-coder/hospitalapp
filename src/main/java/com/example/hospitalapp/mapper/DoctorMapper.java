@@ -13,11 +13,9 @@ public class DoctorMapper {
     private ModelMapper modelMapper;
 
     public DoctorDto convertToDto(Doctor doctor) {
-        DoctorDto doctorDto = modelMapper.map(doctor, DoctorDto.class);
-        return doctorDto;
+        return modelMapper.map(doctor, DoctorDto.class);
     }
     public Doctor convertToEntity(DoctorDto doctorDto) {
-        Doctor doctor = modelMapper.map(doctorDto, Doctor.class);
-        return doctor;
+        return modelMapper.map(doctorDto, Doctor.class);
     }
 }

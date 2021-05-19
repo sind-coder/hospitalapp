@@ -11,13 +11,10 @@ public class PatientMapper {
     @Autowired
     private ModelMapper modelMapper;
 
-
     public PatientDto convertToDto(Patient patient) {
-        PatientDto patientDto = modelMapper.map(patient, PatientDto.class);
-        return patientDto;
+        return modelMapper.map(patient, PatientDto.class);
     }
     public Patient convertToEntity(PatientDto patientDto) {
-        Patient patient = modelMapper.map(patientDto, Patient.class);
-        return patient;
+        return modelMapper.map(patientDto, Patient.class);
     }
 }
