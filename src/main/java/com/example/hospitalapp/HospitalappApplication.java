@@ -12,7 +12,6 @@ public class HospitalappApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(HospitalappApplication.class, args);
 	}
-
 	@Bean
 	public ModelMapper modelMapper() {
 		return new ModelMapper();

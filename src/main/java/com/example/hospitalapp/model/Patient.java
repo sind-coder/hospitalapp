@@ -13,7 +13,7 @@ public class Patient {
 
     @Id
     @NotNull
-    @Column(name = "patientid")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonView(Views.Vue.class)
     private Long id;
@@ -36,9 +36,9 @@ public class Patient {
     private int age;
 
     @ManyToMany
-    @JoinTable(name = "patientacceptance",
-            joinColumns = @JoinColumn(name="patientid"),
-            inverseJoinColumns = @JoinColumn(name = "doctorid"))
+    @JoinTable(name = "patient_acceptance",
+            joinColumns = @JoinColumn(name="id_patient"),
+            inverseJoinColumns = @JoinColumn(name = "id_doctor"))
     private Set<Doctor> doctors = new HashSet<>();
 
     public Set<Doctor> getDoctors() {

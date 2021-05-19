@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.util.stream.Collectors.toList;
 
 
 @Service
@@ -30,18 +29,17 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public List<DoctorDto> findAll() {
         return doctorRepository.findAll().stream()
-                .map(doctorMapper::convertToDto).collect(toList());
+                .map(doctorMapper::convertToDto).collect(Collectors.toList());
     }
 
     @Override
     public List<DoctorDto> findByPatientsId(Long id) {
         return doctorRepository.findByPatientsId(id).stream()
-                .map(doctorMapper::convertToDto)
-                .collect(toList());
+                .map(doctorMapper::convertToDto).collect(Collectors.toList());
     }
 
     @Override
-    public DoctorDto findByIdUpdate(Doctor doctor, Long id) {
+    public DoctorDto findById_update(Doctor doctor, Long id) {
         return doctorRepository.findById(id).map(
                 doctors -> {
                     doctors.setFirstName(doctor.getFirstName());
@@ -59,8 +57,7 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public List<DoctorDto> findById(Long id) {
         return doctorRepository.findById(id).stream()
-                .map(doctorMapper::convertToDto)
-                .collect(toList());
+                .map(doctorMapper::convertToDto).collect(Collectors.toList());
     }
 
     @Override

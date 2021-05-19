@@ -76,9 +76,9 @@ public class PatientController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Patient> updatePatient(@RequestBody Patient patient,
-                                                 @PathVariable(name = "id") Long id) {
+                                 @PathVariable(name = "id") Long id) {
         Patient patientUpdate = patientMapper.convertToEntity(
-                patientService.findByIdUpdate(patient, id));
+                patientService.findById_update(patient, id));
         if (patientUpdate == null) {
             return new ResponseEntity<>(patientUpdate, HttpStatus.NO_CONTENT);
         } else {

@@ -55,7 +55,7 @@ public class DoctorController {
         if (patientList.toArray().length == 0) {
             return new ResponseEntity<>(patientList, HttpStatus.NO_CONTENT);
         } else {
-            return new ResponseEntity<>(patientList, HttpStatus.OK);
+        return new ResponseEntity<>(patientList, HttpStatus.OK);
         }
     }
 
@@ -76,7 +76,7 @@ public class DoctorController {
     public ResponseEntity<Doctor> updateDoctor(
             @RequestBody Doctor doctor, @PathVariable(name = "id") Long id) {
         Doctor doctorUpdate = doctorMapper.convertToEntity(
-                doctorService.findByIdUpdate(doctor,id));
+                doctorService.findById_update(doctor,id));
         if (doctorUpdate == null) {
             return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
         } else {
