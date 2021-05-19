@@ -19,7 +19,7 @@ import DoctorForm from 'components/DoctorForm.vue'
         doctor: null
         }},
         created(){
-        this.$resource('/doctor{/id}').get().then(result =>
+        this.$resource('/doctors{/id}').get().then(result =>
         result.json().then(data =>
         data.forEach(doctor => this.doctors.push(doctor))))
 },

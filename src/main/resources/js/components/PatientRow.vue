@@ -18,7 +18,7 @@
         props: ['patient','patients'],
        methods:{
         del() {
-            this.$resource('/patient{/id}').remove({id: this.patient.id}).then(result => {
+            this.$resource('/patients{/id}').remove({id: this.patient.id}).then(result => {
                 if (result.ok) {
                     this.patients.splice(this.patients.indexOf(this.patient), 1)
                 }

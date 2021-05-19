@@ -20,8 +20,7 @@ data() {
     }},
 created(){
 var id = this.$route.params.id;
-console.log(id);
-this.$resource('/doctor{/id}').get({id: id}).then(result => result.json().then(data => {this.patients = data;console.log(data);}))},
+this.$resource('/doctors{/id}').get({id: id}).then(result => result.json().then(data => {this.patients = data;console.log(data);}))},
  methods: {
  create: function(){
  var id = this.$route.params.id

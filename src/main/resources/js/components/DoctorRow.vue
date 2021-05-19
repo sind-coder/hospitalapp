@@ -37,7 +37,7 @@ data() {
     }},
 methods:{
 del() {
-            this.$resource('/doctor{/id}').remove({id: this.doctor.id}).then(result => {
+            this.$resource('/doctors{/id}').remove({id: this.doctor.id}).then(result => {
                 if (result.ok) {
                     this.doctors.splice(this.doctors.indexOf(this.doctor), 1)
                 }

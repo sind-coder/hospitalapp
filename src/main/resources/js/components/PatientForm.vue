@@ -55,7 +55,7 @@
                     age: this.age};
    if(!(this.entry())){
    this.showDismissibleAlert=true
-   this.$resource('/patient{/id}').save({id: id},patient).then(data => {console.log(data);
+   this.$resource('/patients{/id}').save({id: id},patient).then(data => {console.log(data);
       this.firstName = ''
       this.lastName = ''
       this.diagnosis = ''
